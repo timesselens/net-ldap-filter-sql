@@ -1,0 +1,21 @@
+---
+abstract: 'A module to convert ldap filters into sql queries'
+author:
+  - 'Tim Esselens <tim.esselens@gmail.com>'
+configure_requires:
+  Module::Build: 0.36
+generated_by: 'Module::Build version 0.3603'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Net-LDAP-Filter-SQL
+provides:
+  Net::LDAP::Filter::SQL:
+    file: lib/Net/LDAP/Filter/SQL.pm
+    version: 0.01
+requires:
+  Net::LDAP: 0
+resources:
+  license: http://dev.perl.org/licenses/
+version: 0.01
