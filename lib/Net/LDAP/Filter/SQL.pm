@@ -83,7 +83,7 @@ Net::LDAP::Filter::SQL - LDAP filter to SQL clause transformer
     # -or-
     my $ldapfilter = bless({ 'equalityMatch' => { 'assertionValue' => 'bar', 'attributeDesc' => 'foo' } }, 'Net::LDAP::Filter');
 
-    my $sqlfilter = bless($filter,'Net::LDAP::Filter::SQL');
+    my $sqlfilter = bless($ldapfilter,'Net::LDAP::Filter::SQL');
     # -or-
     my $sqlfilter = new Net::LDAP::Filter::SQL('(&(name=Marge)(city=Springfield))');
 
