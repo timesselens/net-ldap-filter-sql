@@ -1,8 +1,2 @@
 .*.sw?
-Build
-MANIFEST
-META.yml
-MYMETA.yml
-_build/
-blib/
-
+.build
