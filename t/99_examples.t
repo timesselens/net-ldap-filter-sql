@@ -27,3 +27,5 @@ diag(Dumper({ clause => $sqlfilter2->sql_clause, values => $sqlfilter2->sql_valu
 #                       ]
 #         };
 
+ok(1, "example run");
+done_testing();
