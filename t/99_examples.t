@@ -2,13 +2,31 @@ use Test::More;
 use Net::LDAP::Filter::SQL;
 use Data::Dumper;
 
-my $ldapfilter1 = new Net::LDAP::Filter('(&(name=Homer)(city=Springfield))');
-my $ldapfilter2 = bless({ 'equalityMatch' => { 'assertionValue' => 'bar', 'attributeDesc' => 'foo' } }, 'Net::LDAP::Filter');
+my $ldapfilter = new Net::LDAP::Filter('(&(name=Homer)(city=Springfield))');
 
-my $sqlfilter1 = bless($ldapfilter1,'Net::LDAP::Filter::SQL');
-my $sqlfilter2 = new Net::LDAP::Filter::SQL('(&(name=Marge)(city=Springfield))');
+my $sqlfilter  = new Net::LDAP::Filter::SQL('(&(name=Marge)(city=Springfield))');
+my $sqlfilter2 = Net::LDAP::Filter::SQL->new_from_data({ 'equalityMatch' => { 'assertionValue' => 'bar', 'attributeDesc' => 'foo' } });
+my $sqlfilter3 = bless($ldapfilter,'Net::LDAP::Filter::SQL');
 
-diag(Dumper({ clause => $sqlfilter1->sql_clause, values => $sqlfilter1->sql_values }));
+diag(Dumper({ clause => $sqlfilter->sql_clause, values => $sqlfilter->sql_values }));
+# $VAR1 = {
+#           'clause' => '(name = ?) and (city = ?)',
+#           'values' => [
+#                         'Marge',
+#                         'Springfield'
+#                       ]
+#         };
+
+diag(Dumper({ clause => $sqlfilter2->sql_clause, values => $sqlfilter2->sql_values }));
+# $VAR1 = {
+#           'clause' => 'foo = ?',
+#           'values' => [
+#                         'bar'
+#                       ]
+#         };
+
+
+diag(Dumper({ clause => $sqlfilter3->sql_clause, values => $sqlfilter3->sql_values }));
 # $VAR1 = {
 #           'clause' => '(name = ?) and (city = ?)',
 #           'values' => [
@@ -17,15 +35,6 @@ diag(Dumper({ clause => $sqlfilter1->sql_clause, values => $sqlfilter1->sql_valu
 #                       ]
 #         };
 
-diag(Dumper({ clause => $sqlfilter2->sql_clause, values => $sqlfilter2->sql_values }));
-
-# $VAR1 = {
-#           'clause' => '(name = ?) and (city = ?)',
-#           'values' => [
-#                         'Marge',
-#                         'Springfield'
-#                       ]
-#         };
 
 ok(1, "example run");
 done_testing();

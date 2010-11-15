@@ -3,6 +3,7 @@ package Net::LDAP::Filter::SQL;
 use strict;
 use warnings;
 use parent qw/Net::LDAP::Filter/;
+use Carp;
 
 our $VERSION = '0.01';
 
@@ -69,6 +70,15 @@ sub as_string {
     return Net::LDAP::Filter::_string(map { $_ => $self->{$_} } grep {! /^sql_/} keys %$self);
 }
 
+sub new_from_data {
+    my $self = shift;
+    my $dataref = shift;
+    croak "expecting a HASH" unless ref $dataref eq 'HASH'; 
+
+    my %data = %$dataref;
+    return bless(\%data, 'Net::LDAP::Filter::SQL');
+}
+
 42;
 
 __END__
@@ -80,12 +90,10 @@ Net::LDAP::Filter::SQL - LDAP filter to SQL clause transformer
 =head1 SYNOPSIS
 
     my $ldapfilter = new Net::LDAP::Filter('(&(name=Homer)(city=Springfield))');
-    # -or-
-    my $ldapfilter = bless({ 'equalityMatch' => { 'assertionValue' => 'bar', 'attributeDesc' => 'foo' } }, 'Net::LDAP::Filter');
 
-    my $sqlfilter = bless($ldapfilter,'Net::LDAP::Filter::SQL');
-    # -or-
-    my $sqlfilter = new Net::LDAP::Filter::SQL('(&(name=Marge)(city=Springfield))');
+    my $sqlfilter  = new Net::LDAP::Filter::SQL('(&(name=Marge)(city=Springfield))');
+    my $sqlfilter2 = Net::LDAP::Filter::SQL->new_from_data({ 'equalityMatch' => { 'assertionValue' => 'bar', 'attributeDesc' => 'foo' } });
+    my $sqlfilter3 = bless($ldapfilter,'Net::LDAP::Filter::SQL');
 
     print Data::Dumper({ clause => $sqlfilter->sql_clause, values => $sqlfilter->sql_values });
 
@@ -102,6 +110,10 @@ accessed as a list, and thus can be used inside a dbh prepare or select call.
 =head2 new( I<ldapfilter> )
 
 Create a new LDAP Filter
+
+=head2 new_from_data( I<$hashref> )
+
+Creates a new LDAP Filter from an existing data set. i.e. a Net::LDAP::Filter structure
 
 =head2 sql_clause(I<>)
 
