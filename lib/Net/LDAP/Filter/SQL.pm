@@ -1,5 +1,5 @@
-#!/usr/bin/perl
 package Net::LDAP::Filter::SQL;
+
 use strict;
 use warnings;
 use parent qw/Net::LDAP::Filter/;
