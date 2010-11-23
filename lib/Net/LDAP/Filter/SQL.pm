@@ -89,11 +89,15 @@ Net::LDAP::Filter::SQL - LDAP filter to SQL clause transformer
 
 =head1 SYNOPSIS
 
-    my $ldapfilter = new Net::LDAP::Filter('(&(name=Homer)(city=Springfield))');
+    my $ldapfilter = new Net::LDAP::Filter( '(&(name=Homer)(city=Springfield))' );
 
-    my $sqlfilter  = new Net::LDAP::Filter::SQL('(&(name=Marge)(city=Springfield))');
+
+    my $sqlfilter  = new Net::LDAP::Filter::SQL( '(&(name=Marge)(city=Springfield))' );
+
     my $sqlfilter2 = Net::LDAP::Filter::SQL->new_from_data({ 'equalityMatch' => { 'assertionValue' => 'bar', 'attributeDesc' => 'foo' } });
+
     my $sqlfilter3 = bless($ldapfilter,'Net::LDAP::Filter::SQL');
+
 
     print Data::Dumper({ clause => $sqlfilter->sql_clause, values => $sqlfilter->sql_values });
 
@@ -136,10 +140,6 @@ returns a list of values associated with the filter
     #                         'Springfield'
     #                       ]
     #         };
-
-=head1 AUTHOR
-
-Tim Esselens C<< <tim.esselens@gmail.com> >>
 
 =head1 BUGS
 
