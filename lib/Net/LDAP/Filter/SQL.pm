@@ -1,7 +1,7 @@
 #!/usr/bin/perl
-package Net::LDAP::Filter::SQL;
 use strict;
 use warnings;
+package Net::LDAP::Filter::SQL;
 use parent qw/Net::LDAP::Filter/;
 use Carp;
 
