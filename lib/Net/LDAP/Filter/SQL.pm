@@ -111,19 +111,19 @@ accessed as a list, and thus can be used inside a dbh prepare or select call.
 
 =head1 METHODS
 
-=head2 new( I<ldapfilter> )
+=method new( I<ldapfilter> )
 
 Create a new LDAP Filter
 
-=head2 new_from_data( I<$hashref> )
+=method new_from_data( I<$hashref> )
 
 Creates a new LDAP Filter from an existing data set. i.e. a Net::LDAP::Filter structure
 
-=head2 sql_clause(I<>)
+=method sql_clause(I<>)
 
 returns an sql where clause in string format with '?' placeholders
 
-=head2 sql_values(I<>)
+=method sql_values(I<>)
 
 returns a list of values associated with the filter
 
@@ -147,11 +147,8 @@ probably lots, please send patches
 
 =head1 TODO
 
-=over
-
-figure out what approxMatch should do. e.g. soundex? 
-
-=back
+=for :list
+* figure out what approxMatch should do. e.g. soundex? 
 
 =head1 SUPPORT
 
@@ -159,18 +156,12 @@ send me an e-mail
 
 =head1 SEE ALSO
 
-L<Net::LDAP::Filter>
-L<Net::LDAP::Server>
+=for :list
+* L<Net::LDAP::Filter>
+* L<Net::LDAP::Server>
 
 =head1 ACKNOWLEDGEMENTS
 
 My mother, for raising me and my brother the way she did. Thanks mom!
-
-=head1 COPYRIGHT & LICENSE
-
-Copyright 2010 datif - Tim Esselens
-
-This program is free software; you can redistribute it and/or modify it
-under the same terms as Perl itself.
 
 =cut
