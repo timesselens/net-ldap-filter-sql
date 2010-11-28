@@ -5,8 +5,6 @@ package Net::LDAP::Filter::SQL;
 use parent qw/Net::LDAP::Filter/;
 use Carp;
 
-our $VERSION = '0.01';
-
 sub _filter_parse {
     my $self = shift;
     my $hash = shift || $self;
