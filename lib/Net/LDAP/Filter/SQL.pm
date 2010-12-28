@@ -146,7 +146,20 @@ probably lots, please send patches
 =head1 TODO
 
 =for :list
-* figure out what approxMatch should do. e.g. soundex? 
+
+Figure out what to do with C<approxMatch>. From RFC 4511 (L<< 
+http://www.faqs.org/rfcs/rfc4511.html >>):
+
+   4.5.1.7.6.  SearchRequest.filter.approxMatch
+   An approxMatch filter is TRUE when there is a value of the attribute
+   type or subtype for which some locally-defined approximate matching
+   algorithm (e.g., spelling variations, phonetic match, etc.) returns
+   TRUE.  If a value matches for equality, it also satisfies an
+   approximate match.  If approximate matching is not supported for the
+   attribute, this filter item should be treated as an equalityMatch.
+
+That's it: whatever you want it to be. Regex, soundex, etc..
+or simply make it like an C<equalityMatch>.
 
 =head1 SUPPORT
 
